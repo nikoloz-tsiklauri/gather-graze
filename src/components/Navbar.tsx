@@ -93,14 +93,16 @@ const Navbar: React.FC = () => {
         <a 
           href="/" 
           onClick={handleHomeClick} 
-          className="flex items-center hover:opacity-80 transition-opacity duration-200"
+          className="flex items-center hover:opacity-90 transition-opacity duration-200"
           aria-label="Gather & Graze - Home"
         >
-          <img
-            src={logo}
-            alt="Gather & Graze Logo"
-            className="h-9 w-auto md:h-10"
-          />
+          <div className="rounded-lg bg-white/90 px-3 py-1.5 shadow-sm">
+            <img
+              src={logo}
+              alt="Gather & Graze Logo"
+              className="h-11 w-auto md:h-12"
+            />
+          </div>
         </a>
 
         {/* Desktop nav */}
