@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/context/LanguageContext';
 import { useCart } from '@/context/CartContext';
+import { useUI } from '@/context/UIContext';
 import { business } from '@/config/business';
 import { Menu, X, ShoppingCart, Phone } from 'lucide-react';
 import type { Lang } from '@/i18n/translations';
@@ -12,6 +13,7 @@ const langLabels: Record<Lang, string> = { ka: 'KA', en: 'EN', ru: 'RU' };
 const Navbar: React.FC = () => {
   const { lang, setLang, t } = useLanguage();
   const { totalItems } = useCart();
+  const { openCartDrawer } = useUI();
   const [open, setOpen] = useState(false);
   const location = useLocation();
 
@@ -32,20 +34,33 @@ const Navbar: React.FC = () => {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map(link => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className={`text-sm font-medium transition-colors hover:text-primary ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground'}`}
-            >
-              {link.label}
-              {link.to === '/cart' && totalItems > 0 && (
-                <span className="ml-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-accent text-xs font-bold text-accent-foreground">
-                  {totalItems}
-                </span>
-              )}
-            </Link>
-          ))}
+          {navLinks.map(link => {
+            if (link.to === '/cart') {
+              return (
+                <button
+                  key={link.to}
+                  onClick={() => openCartDrawer()}
+                  className={`text-sm font-medium transition-colors hover:text-primary ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground'}`}
+                >
+                  {link.label}
+                  {totalItems > 0 && (
+                    <span className="ml-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-accent text-xs font-bold text-accent-foreground">
+                      {totalItems}
+                    </span>
+                  )}
+                </button>
+              );
+            }
+            return (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`text-sm font-medium transition-colors hover:text-primary ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground'}`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
@@ -68,14 +83,14 @@ const Navbar: React.FC = () => {
 
         {/* Mobile */}
         <div className="flex md:hidden items-center gap-2">
-          <Link to="/cart" className="relative p-2">
+          <button onClick={() => openCartDrawer()} className="relative p-2">
             <ShoppingCart className="h-5 w-5" />
             {totalItems > 0 && (
               <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-accent text-[10px] font-bold flex items-center justify-center text-accent-foreground">
                 {totalItems}
               </span>
             )}
-          </Link>
+          </button>
           <button onClick={() => setOpen(!open)} className="p-2">
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -86,16 +101,29 @@ const Navbar: React.FC = () => {
       {open && (
         <div className="md:hidden border-t border-border bg-background p-4 animate-fade-in">
           <nav className="flex flex-col gap-3">
-            {navLinks.map(link => (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setOpen(false)}
-                className={`text-sm font-medium py-2 ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground'}`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map(link => {
+              if (link.to === '/cart') {
+                return (
+                  <button
+                    key={link.to}
+                    onClick={() => { openCartDrawer(); setOpen(false); }}
+                    className={`text-sm font-medium py-2 text-left ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground'}`}
+                  >
+                    {link.label}
+                  </button>
+                );
+              }
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setOpen(false)}
+                  className={`text-sm font-medium py-2 ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground'}`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
           <div className="flex gap-2 mt-4 pt-4 border-t border-border">
             {langs.map(l => (

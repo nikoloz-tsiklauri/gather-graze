@@ -17,6 +17,8 @@ interface CartContextType {
   totalItems: number;
   getProduct: (id: string) => Product | undefined;
   cartSubtotal: number;
+  onAddItemCallback?: (productId: string) => void;
+  setOnAddItemCallback: (callback: (productId: string) => void) => void;
 }
 
 const CartContext = createContext<CartContextType>({} as CartContextType);
@@ -33,6 +35,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } catch { return []; }
   });
 
+  const [onAddItemCallback, setOnAddItemCallback] = useState<((productId: string) => void) | undefined>();
+
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }, [items]);
@@ -48,7 +52,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       return [...prev, { productId, quantity: qty, notes }];
     });
-  }, []);
+    
+    // Trigger callback after adding item
+    if (onAddItemCallback) {
+      onAddItemCallback(productId);
+    }
+  }, [onAddItemCallback]);
 
   const removeItem = useCallback((productId: string) => {
     setItems(prev => prev.filter(i => i.productId !== productId));
@@ -78,7 +87,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, 0);
 
   return (
-    <CartContext.Provider value={{ items, addItem, removeItem, updateQuantity, updateNotes, clearCart, totalItems, getProduct, cartSubtotal }}>
+    <CartContext.Provider value={{ items, addItem, removeItem, updateQuantity, updateNotes, clearCart, totalItems, getProduct, cartSubtotal, onAddItemCallback, setOnAddItemCallback }}>
       {children}
     </CartContext.Provider>
   );
