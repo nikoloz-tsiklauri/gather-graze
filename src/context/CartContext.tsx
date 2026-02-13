@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react';
 import { products, type Product } from '@/data/products';
 
 export interface CartItem {
@@ -35,11 +35,16 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } catch { return []; }
   });
 
-  const [onAddItemCallback, setOnAddItemCallback] = useState<((productId: string) => void) | undefined>();
+  // Use useRef to store callback to avoid stale closure issues
+  const onAddItemCallbackRef = useRef<((productId: string) => void) | undefined>();
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }, [items]);
+
+  const setOnAddItemCallback = useCallback((callback: (productId: string) => void) => {
+    onAddItemCallbackRef.current = callback;
+  }, []);
 
   const addItem = useCallback((productId: string, qty = 1, notes = '') => {
     setItems(prev => {
@@ -54,10 +59,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
     
     // Trigger callback after adding item
-    if (onAddItemCallback) {
-      onAddItemCallback(productId);
+    if (onAddItemCallbackRef.current) {
+      onAddItemCallbackRef.current(productId);
     }
-  }, [onAddItemCallback]);
+  }, []);
 
   const removeItem = useCallback((productId: string) => {
     setItems(prev => prev.filter(i => i.productId !== productId));
@@ -87,7 +92,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, 0);
 
   return (
-    <CartContext.Provider value={{ items, addItem, removeItem, updateQuantity, updateNotes, clearCart, totalItems, getProduct, cartSubtotal, onAddItemCallback, setOnAddItemCallback }}>
+    <CartContext.Provider value={{ items, addItem, removeItem, updateQuantity, updateNotes, clearCart, totalItems, getProduct, cartSubtotal, onAddItemCallback: onAddItemCallbackRef.current, setOnAddItemCallback }}>
       {children}
     </CartContext.Provider>
   );
