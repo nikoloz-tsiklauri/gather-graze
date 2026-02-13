@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
           </p>
           <div className="mt-10 flex flex-wrap gap-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
             <Link to="/menu">
-              <Button size="lg" className="rounded-2xl px-10 py-7 text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95">
+              <Button size="lg" className="rounded-2xl px-10 py-7 text-base font-semibold bg-accent text-neutral-900 hover:bg-accent/90 hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95">
                 {t('hero.ctaMenu')}
               </Button>
             </Link>
