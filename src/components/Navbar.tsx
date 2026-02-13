@@ -1,22 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/context/LanguageContext';
 import { useCart } from '@/context/CartContext';
 import { useUI } from '@/context/UIContext';
 import { business } from '@/config/business';
-import { Menu, X, ShoppingCart, Phone } from 'lucide-react';
+import { Menu, X, ShoppingCart, Phone, Globe, Check } from 'lucide-react';
 import type { Lang } from '@/i18n/translations';
 
 const langs: Lang[] = ['ka', 'en', 'ru'];
-const langLabels: Record<Lang, string> = { ka: 'KA', en: 'EN', ru: 'RU' };
+const langLabels: Record<Lang, string> = { ka: 'ქართული', en: 'English', ru: 'Русский' };
+const langLabelsShort: Record<Lang, string> = { ka: 'KA', en: 'EN', ru: 'RU' };
 
 const Navbar: React.FC = () => {
   const { lang, setLang, t } = useLanguage();
   const { totalItems } = useCart();
   const { openCartDrawer } = useUI();
   const [open, setOpen] = useState(false);
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
+  const langDropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Close language dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (langDropdownRef.current && !langDropdownRef.current.contains(event.target as Node)) {
+        setLangDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const navLinks = [
     { to: '/', label: t('nav.home') },
@@ -54,6 +68,20 @@ const Navbar: React.FC = () => {
         if (contactSection) {
           contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+      }, 100);
+    }
+  };
+
+  const handleMenuClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname === '/menu') {
+      // Already on menu page, scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Navigate to menu, then scroll to top
+      navigate('/menu');
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }, 100);
     }
   };
@@ -96,6 +124,17 @@ const Navbar: React.FC = () => {
                 </a>
               );
             }
+            if (link.to === '/menu') {
+              return (
+                <button
+                  key={link.to}
+                  onClick={handleMenuClick}
+                  className={`text-sm font-medium transition-all duration-200 hover:text-primary ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground'}`}
+                >
+                  {link.label}
+                </button>
+              );
+            }
             if (link.to === 'contact') {
               return (
                 <button
@@ -124,16 +163,36 @@ const Navbar: React.FC = () => {
             <Phone className="h-4 w-4" />
             <span className="hidden lg:inline font-medium">{business.phone}</span>
           </a>
-          <div className="flex rounded-xl border border-border/60 overflow-hidden shadow-sm bg-card">
-            {langs.map(l => (
-              <button
-                key={l}
-                onClick={() => setLang(l)}
-                className={`px-3 py-1.5 text-xs font-semibold transition-all duration-200 ${lang === l ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-secondary/50'}`}
-              >
-                {langLabels[l]}
-              </button>
-            ))}
+          
+          {/* Language Switcher Dropdown */}
+          <div className="relative" ref={langDropdownRef}>
+            <button
+              onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+              className="flex items-center gap-2 px-3 py-2 rounded-xl border border-border/60 bg-card hover:bg-secondary/50 transition-all duration-200 shadow-sm"
+              aria-label="Change language"
+            >
+              <Globe className="h-4 w-4 text-muted-foreground" />
+              <span className="text-xs font-semibold text-foreground">{langLabelsShort[lang]}</span>
+            </button>
+            
+            {langDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-40 rounded-xl border border-border/60 bg-card shadow-lg overflow-hidden animate-fade-in z-50">
+                {langs.map(l => (
+                  <button
+                    key={l}
+                    onClick={() => { setLang(l); setLangDropdownOpen(false); }}
+                    className={`w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors ${
+                      lang === l 
+                        ? 'bg-primary/10 text-primary font-semibold' 
+                        : 'text-foreground hover:bg-secondary/50'
+                    }`}
+                  >
+                    <span>{langLabels[l]}</span>
+                    {lang === l && <Check className="h-4 w-4" />}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
@@ -181,6 +240,17 @@ const Navbar: React.FC = () => {
                   </a>
                 );
               }
+              if (link.to === '/menu') {
+                return (
+                  <button
+                    key={link.to}
+                    onClick={(e) => { handleMenuClick(e); setOpen(false); }}
+                    className={`text-sm font-medium py-2.5 text-left transition-colors ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}
+                  >
+                    {link.label}
+                  </button>
+                );
+              }
               if (link.to === 'contact') {
                 return (
                   <button
@@ -211,7 +281,7 @@ const Navbar: React.FC = () => {
                 onClick={() => { setLang(l); setOpen(false); }}
                 className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 shadow-sm ${lang === l ? 'bg-primary text-primary-foreground' : 'bg-secondary/70 text-secondary-foreground hover:bg-secondary'}`}
               >
-                {langLabels[l]}
+                {langLabelsShort[l]}
               </button>
             ))}
           </div>
