@@ -26,9 +26,9 @@ const Navbar: React.FC = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-      <div className="container flex h-16 items-center justify-between">
-        <Link to="/" className="font-heading text-2xl font-bold text-primary">
+    <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 shadow-sm">
+      <div className="container flex h-20 items-center justify-between">
+        <Link to="/" className="font-heading text-2xl font-bold text-primary tracking-tight hover:text-primary/80 transition-colors">
           {business.nameLocalized[lang] || business.name}
         </Link>
 
@@ -40,11 +40,11 @@ const Navbar: React.FC = () => {
                 <button
                   key={link.to}
                   onClick={() => openCartDrawer()}
-                  className={`text-sm font-medium transition-colors hover:text-primary ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground'}`}
+                  className={`text-sm font-medium transition-all duration-200 hover:text-primary ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground'}`}
                 >
                   {link.label}
                   {totalItems > 0 && (
-                    <span className="ml-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-accent text-xs font-bold text-accent-foreground">
+                    <span className="ml-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-accent text-xs font-bold text-accent-foreground shadow-sm">
                       {totalItems}
                     </span>
                   )}
@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`text-sm font-medium transition-colors hover:text-primary ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground'}`}
+                className={`text-sm font-medium transition-all duration-200 hover:text-primary ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground'}`}
               >
                 {link.label}
               </Link>
@@ -63,17 +63,17 @@ const Navbar: React.FC = () => {
           })}
         </nav>
 
-        <div className="hidden md:flex items-center gap-3">
-          <a href={`tel:${business.phone.replace(/\s/g, '')}`} className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors">
+        <div className="hidden md:flex items-center gap-4">
+          <a href={`tel:${business.phone.replace(/\s/g, '')}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-all duration-200">
             <Phone className="h-4 w-4" />
-            <span className="hidden lg:inline">{business.phone}</span>
+            <span className="hidden lg:inline font-medium">{business.phone}</span>
           </a>
-          <div className="flex rounded-lg border border-border overflow-hidden">
+          <div className="flex rounded-xl border border-border/60 overflow-hidden shadow-sm bg-card">
             {langs.map(l => (
               <button
                 key={l}
                 onClick={() => setLang(l)}
-                className={`px-2.5 py-1 text-xs font-medium transition-colors ${lang === l ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-secondary'}`}
+                className={`px-3 py-1.5 text-xs font-semibold transition-all duration-200 ${lang === l ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-secondary/50'}`}
               >
                 {langLabels[l]}
               </button>
@@ -83,15 +83,15 @@ const Navbar: React.FC = () => {
 
         {/* Mobile */}
         <div className="flex md:hidden items-center gap-2">
-          <button onClick={() => openCartDrawer()} className="relative p-2">
+          <button onClick={() => openCartDrawer()} className="relative p-2 hover:bg-secondary/50 rounded-xl transition-colors">
             <ShoppingCart className="h-5 w-5" />
             {totalItems > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-accent text-[10px] font-bold flex items-center justify-center text-accent-foreground">
+              <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-accent text-[10px] font-bold flex items-center justify-center text-accent-foreground shadow-sm">
                 {totalItems}
               </span>
             )}
           </button>
-          <button onClick={() => setOpen(!open)} className="p-2">
+          <button onClick={() => setOpen(!open)} className="p-2 hover:bg-secondary/50 rounded-xl transition-colors">
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
@@ -99,7 +99,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t border-border bg-background p-4 animate-fade-in">
+        <div className="md:hidden border-t border-border/50 bg-background/95 backdrop-blur-xl p-6 animate-fade-in shadow-lg">
           <nav className="flex flex-col gap-3">
             {navLinks.map(link => {
               if (link.to === '/cart') {
@@ -107,7 +107,7 @@ const Navbar: React.FC = () => {
                   <button
                     key={link.to}
                     onClick={() => { openCartDrawer(); setOpen(false); }}
-                    className={`text-sm font-medium py-2 text-left ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground'}`}
+                    className={`text-sm font-medium py-2.5 text-left transition-colors ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}
                   >
                     {link.label}
                   </button>
@@ -118,19 +118,19 @@ const Navbar: React.FC = () => {
                   key={link.to}
                   to={link.to}
                   onClick={() => setOpen(false)}
-                  className={`text-sm font-medium py-2 ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground'}`}
+                  className={`text-sm font-medium py-2.5 transition-colors ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}
                 >
                   {link.label}
                 </Link>
               );
             })}
           </nav>
-          <div className="flex gap-2 mt-4 pt-4 border-t border-border">
+          <div className="flex gap-2 mt-6 pt-6 border-t border-border/50">
             {langs.map(l => (
               <button
                 key={l}
                 onClick={() => { setLang(l); setOpen(false); }}
-                className={`px-3 py-1.5 rounded text-xs font-medium ${lang === l ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'}`}
+                className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 shadow-sm ${lang === l ? 'bg-primary text-primary-foreground' : 'bg-secondary/70 text-secondary-foreground hover:bg-secondary'}`}
               >
                 {langLabels[l]}
               </button>

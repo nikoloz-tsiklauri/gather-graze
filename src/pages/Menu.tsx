@@ -40,9 +40,9 @@ const Menu: React.FC = () => {
   }, [category, search, sortBy, tags, lang]);
 
   return (
-    <main className="py-10">
+    <main className="py-12">
       <div className="container">
-        <h1 className="heading-display text-3xl sm:text-4xl mb-8">{t('menu.title')}</h1>
+        <h1 className="heading-display text-4xl sm:text-5xl mb-10 tracking-tight">{t('menu.title')}</h1>
         <FiltersBar
           selectedCategory={category}
           onCategoryChange={setCategory}
@@ -53,11 +53,16 @@ const Menu: React.FC = () => {
           selectedTags={tags}
           onTagToggle={toggleTag}
         />
-        <div className="mt-8" id="menu-list">
+        <div className="mt-10" id="menu-list">
           {filtered.length === 0 ? (
-            <p className="text-center text-muted-foreground py-12">{t('menu.noResults')}</p>
+            <div className="text-center py-20">
+              <div className="rounded-full bg-secondary/50 p-8 inline-flex mb-4">
+                <span className="text-5xl opacity-40">🔍</span>
+              </div>
+              <p className="text-muted-foreground text-lg">{t('menu.noResults')}</p>
+            </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7">
               {filtered.map(product => (
                 <ProductCard key={product.id} product={product} onDetails={setSelectedProduct} />
               ))}
