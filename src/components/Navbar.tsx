@@ -6,6 +6,7 @@ import { useUI } from '@/context/UIContext';
 import { business } from '@/config/business';
 import { Menu, X, ShoppingCart, Phone, Globe, Check } from 'lucide-react';
 import type { Lang } from '@/i18n/translations';
+import logo from '@/assets/gather-graze-logo.png';
 
 const langs: Lang[] = ['ka', 'en', 'ru'];
 const langLabels: Record<Lang, string> = { ka: 'ქართული', en: 'English', ru: 'Русский' };
@@ -89,8 +90,17 @@ const Navbar: React.FC = () => {
   return (
     <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="container flex h-20 items-center justify-between">
-        <a href="/" onClick={handleHomeClick} className="font-heading text-2xl font-bold text-primary tracking-tight hover:text-primary/80 transition-colors">
-          {business.nameLocalized[lang] || business.name}
+        <a 
+          href="/" 
+          onClick={handleHomeClick} 
+          className="flex items-center hover:opacity-80 transition-opacity duration-200"
+          aria-label="Gather & Graze - Home"
+        >
+          <img
+            src={logo}
+            alt="Gather & Graze Logo"
+            className="h-9 w-auto md:h-10"
+          />
         </a>
 
         {/* Desktop nav */}
