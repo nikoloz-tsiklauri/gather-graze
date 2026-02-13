@@ -30,7 +30,7 @@ const Hero: React.FC = () => {
                 {t('hero.ctaMenu')}
               </Button>
             </Link>
-            <Button size="lg" variant="outline" className="rounded-2xl px-10 py-7 text-base font-semibold border-2 border-background/50 text-background hover:bg-background/15 hover:border-background/70 backdrop-blur-sm transition-all duration-300 hover:scale-105 active:scale-95" onClick={handleOrderCTA}>
+            <Button size="lg" variant="outline" className="rounded-2xl px-10 py-7 text-base font-semibold border-2 border-background/50 text-neutral-900 hover:bg-background/15 hover:border-background/70 backdrop-blur-sm transition-all duration-300 hover:scale-105 active:scale-95" onClick={handleOrderCTA}>
               {t('hero.ctaOrder')}
             </Button>
           </div>
