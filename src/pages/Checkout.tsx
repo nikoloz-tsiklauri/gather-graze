@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/context/LanguageContext';
 import { useCart } from '@/context/CartContext';
@@ -8,6 +8,7 @@ import {
   emptyInventory, emptyServices, type InventoryState, type ServicesState,
 } from '@/lib/pricing';
 import { sendOrderEmail, generateOrderId, type OrderData } from '@/lib/emailService';
+import { toast } from '@/hooks/use-toast';
 
 const inventoryKeys = ['plates', 'cups', 'cutlery', 'tables', 'chairs', 'tablecloths'] as const;
 
@@ -15,6 +16,25 @@ const Checkout: React.FC = () => {
   const { lang, t } = useLanguage();
   const { items, getProduct, cartSubtotal, clearCart } = useCart();
   const navigate = useNavigate();
+
+  // Checkout page guard - redirect if cart is empty
+  useEffect(() => {
+    if (items.length === 0) {
+      toast({
+        description: t('cart.emptyToast'),
+        duration: 4000,
+      });
+      navigate('/menu');
+      
+      // Scroll to product list after navigation
+      setTimeout(() => {
+        const menuList = document.getElementById('menu-list');
+        if (menuList) {
+          menuList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, [items.length, navigate, t]);
 
   const [form, setForm] = useState({
     name: '', phone: '', email: '',

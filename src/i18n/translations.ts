@@ -99,6 +99,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'cart.checkout': 'შეკვეთის გაფორმება',
     'cart.continue': 'მენიუს გაგრძელება',
     'cart.notes': 'შენიშვნა',
+    'cart.emptyToast': 'კალათა ცარიელია — აირჩიე პროდუქტები მენიუდან',
     // Checkout
     'checkout.title': 'შეკვეთის გაფორმება',
     'checkout.customer': 'კლიენტის ინფორმაცია',
@@ -241,6 +242,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'cart.checkout': 'Proceed to Checkout',
     'cart.continue': 'Continue Shopping',
     'cart.notes': 'Note',
+    'cart.emptyToast': 'Your cart is empty — choose items from the menu',
     'checkout.title': 'Checkout',
     'checkout.customer': 'Customer Information',
     'checkout.name': 'Full Name',
@@ -378,6 +380,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'cart.checkout': 'Оформить заказ',
     'cart.continue': 'Продолжить покупки',
     'cart.notes': 'Примечание',
+    'cart.emptyToast': 'Корзина пуста — выберите позиции из меню',
     'checkout.title': 'Оформление заказа',
     'checkout.customer': 'Информация о клиенте',
     'checkout.name': 'Имя и фамилия',

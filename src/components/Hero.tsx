@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/context/LanguageContext';
 import { Button } from '@/components/ui/button';
+import { useOrderCTA } from '@/hooks/useOrderCTA';
 import heroImage from '@/assets/hero-catering.jpg';
 
 const Hero: React.FC = () => {
   const { t } = useLanguage();
+  const { handleOrderCTA } = useOrderCTA();
 
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
@@ -28,11 +30,9 @@ const Hero: React.FC = () => {
                 {t('hero.ctaMenu')}
               </Button>
             </Link>
-            <Link to="/checkout">
-              <Button size="lg" variant="outline" className="rounded-xl px-8 py-6 text-base font-semibold border-background/40 text-background hover:bg-background/10">
-                {t('hero.ctaOrder')}
-              </Button>
-            </Link>
+            <Button size="lg" variant="outline" className="rounded-xl px-8 py-6 text-base font-semibold border-background/40 text-background hover:bg-background/10" onClick={handleOrderCTA}>
+              {t('hero.ctaOrder')}
+            </Button>
           </div>
         </div>
       </div>

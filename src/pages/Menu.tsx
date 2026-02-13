@@ -53,7 +53,7 @@ const Menu: React.FC = () => {
           selectedTags={tags}
           onTagToggle={toggleTag}
         />
-        <div className="mt-8">
+        <div className="mt-8" id="menu-list">
           {filtered.length === 0 ? (
             <p className="text-center text-muted-foreground py-12">{t('menu.noResults')}</p>
           ) : (

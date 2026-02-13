@@ -2,12 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/context/LanguageContext';
 import { useCart } from '@/context/CartContext';
+import { useOrderCTA } from '@/hooks/useOrderCTA';
 import { business } from '@/config/business';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 
 const Cart: React.FC = () => {
   const { lang, t } = useLanguage();
   const { items, getProduct, updateQuantity, removeItem, cartSubtotal } = useCart();
+  const { handleOrderCTA } = useOrderCTA();
 
   const deliveryFee = cartSubtotal >= business.delivery.freeThreshold ? 0 : business.delivery.baseFee;
 
@@ -81,11 +83,9 @@ const Cart: React.FC = () => {
                   <span className="font-bold text-primary">{(cartSubtotal + deliveryFee).toFixed(2)}{t('common.gel')}</span>
                 </div>
               </div>
-              <Link to="/checkout" className="block mt-6">
-                <button className="w-full rounded-lg bg-accent py-3 font-semibold text-accent-foreground hover:bg-accent/90 transition-colors">
-                  {t('cart.checkout')}
-                </button>
-              </Link>
+              <button onClick={handleOrderCTA} className="w-full mt-6 rounded-lg bg-accent py-3 font-semibold text-accent-foreground hover:bg-accent/90 transition-colors">
+                {t('cart.checkout')}
+              </button>
               <Link to="/menu" className="block mt-3 text-center text-sm text-muted-foreground hover:text-foreground transition-colors">
                 {t('cart.continue')}
               </Link>
