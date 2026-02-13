@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/context/LanguageContext';
 import { useCart } from '@/context/CartContext';
 import { useUI } from '@/context/UIContext';
@@ -19,6 +20,7 @@ const CartDrawer: React.FC = () => {
   const { items, getProduct, updateQuantity, removeItem, cartSubtotal } = useCart();
   const { cartDrawerOpen, closeCartDrawer, lastAddedProductId } = useUI();
   const { handleOrderCTA } = useOrderCTA();
+  const navigate = useNavigate();
 
   const deliveryFee = cartSubtotal >= business.delivery.freeThreshold ? 0 : business.delivery.baseFee;
   const total = cartSubtotal + deliveryFee;
@@ -26,6 +28,11 @@ const CartDrawer: React.FC = () => {
   const handleCheckout = () => {
     closeCartDrawer();
     handleOrderCTA();
+  };
+
+  const handleContinueShopping = () => {
+    closeCartDrawer();
+    navigate('/menu');
   };
 
   return (
@@ -155,7 +162,7 @@ const CartDrawer: React.FC = () => {
                 {t('cart.checkout')}
               </Button>
               <Button 
-                onClick={closeCartDrawer}
+                onClick={handleContinueShopping}
                 variant="outline"
                 className="w-full rounded-xl border-border/60 hover:bg-secondary/50 transition-all duration-200"
                 size="lg"

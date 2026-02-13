@@ -6,6 +6,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'nav.home': 'მთავარი',
     'nav.menu': 'მენიუ',
     'nav.cart': 'კალათა',
+    'nav.contact': 'კონტაქტი',
     'nav.order': 'შეკვეთა',
     // Hero
     'hero.title': 'პრემიუმ კეითერინგი თქვენი ღონისძიებისთვის',
@@ -161,6 +162,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'nav.home': 'Home',
     'nav.menu': 'Menu',
     'nav.cart': 'Cart',
+    'nav.contact': 'Contact',
     'nav.order': 'Order',
     'hero.title': 'Premium Catering for Your Events',
     'hero.subtitle': 'Buffet, banquet, and full-service catering in Tbilisi. Fresh cuisine, on-time delivery.',
@@ -301,6 +303,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'nav.home': 'Главная',
     'nav.menu': 'Меню',
     'nav.cart': 'Корзина',
+    'nav.contact': 'Контакты',
     'nav.order': 'Заказ',
     'hero.title': 'Премиум кейтеринг для ваших мероприятий',
     'hero.subtitle': 'Фуршет, банкет и полное обслуживание в Тбилиси. Свежая кухня, доставка вовремя.',

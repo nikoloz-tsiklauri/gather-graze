@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/context/LanguageContext';
 import { useCart } from '@/context/CartContext';
 import { useUI } from '@/context/UIContext';
@@ -16,21 +16,54 @@ const Navbar: React.FC = () => {
   const { openCartDrawer } = useUI();
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navLinks = [
     { to: '/', label: t('nav.home') },
     { to: '/menu', label: t('nav.menu') },
     { to: '/cart', label: t('nav.cart') },
+    { to: 'contact', label: t('nav.contact') },
   ];
 
   const isActive = (path: string) => location.pathname === path;
 
+  const handleHomeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname === '/') {
+      // Already on home page, just scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Navigate to home, scroll will happen via useEffect in App or after navigation
+      window.location.href = '/';
+    }
+  };
+
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname === '/') {
+      // Already on home page, scroll to contact section
+      const contactSection = document.getElementById('contact-section');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      // Navigate to home first, then scroll
+      navigate('/');
+      setTimeout(() => {
+        const contactSection = document.getElementById('contact-section');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="container flex h-20 items-center justify-between">
-        <Link to="/" className="font-heading text-2xl font-bold text-primary tracking-tight hover:text-primary/80 transition-colors">
+        <a href="/" onClick={handleHomeClick} className="font-heading text-2xl font-bold text-primary tracking-tight hover:text-primary/80 transition-colors">
           {business.nameLocalized[lang] || business.name}
-        </Link>
+        </a>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6">
@@ -48,6 +81,29 @@ const Navbar: React.FC = () => {
                       {totalItems}
                     </span>
                   )}
+                </button>
+              );
+            }
+            if (link.to === '/') {
+              return (
+                <a
+                  key={link.to}
+                  href="/"
+                  onClick={handleHomeClick}
+                  className={`text-sm font-medium transition-all duration-200 hover:text-primary ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground'}`}
+                >
+                  {link.label}
+                </a>
+              );
+            }
+            if (link.to === 'contact') {
+              return (
+                <button
+                  key={link.to}
+                  onClick={handleContactClick}
+                  className="text-sm font-medium transition-all duration-200 hover:text-primary text-muted-foreground"
+                >
+                  {link.label}
                 </button>
               );
             }
@@ -108,6 +164,29 @@ const Navbar: React.FC = () => {
                     key={link.to}
                     onClick={() => { openCartDrawer(); setOpen(false); }}
                     className={`text-sm font-medium py-2.5 text-left transition-colors ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}
+                  >
+                    {link.label}
+                  </button>
+                );
+              }
+              if (link.to === '/') {
+                return (
+                  <a
+                    key={link.to}
+                    href="/"
+                    onClick={(e) => { handleHomeClick(e); setOpen(false); }}
+                    className={`text-sm font-medium py-2.5 transition-colors ${isActive(link.to) ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}
+                  >
+                    {link.label}
+                  </a>
+                );
+              }
+              if (link.to === 'contact') {
+                return (
+                  <button
+                    key={link.to}
+                    onClick={(e) => { handleContactClick(e); setOpen(false); }}
+                    className="text-sm font-medium py-2.5 text-left transition-colors text-muted-foreground hover:text-primary"
                   >
                     {link.label}
                   </button>
