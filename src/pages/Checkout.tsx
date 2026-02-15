@@ -9,6 +9,10 @@ import {
 } from '@/lib/pricing';
 import { sendOrderEmail, generateOrderId, type OrderData } from '@/lib/emailService';
 import { toast } from '@/hooks/use-toast';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { Minus, Plus } from 'lucide-react';
 
 const inventoryKeys = ['plates', 'cups', 'cutlery', 'tables', 'chairs', 'tablecloths'] as const;
 
@@ -123,164 +127,219 @@ const Checkout: React.FC = () => {
   };
 
   const inputCls = (key: string) =>
-    `w-full rounded-lg border ${errors[key] ? 'border-destructive' : 'border-border'} bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring`;
+    `w-full rounded-xl border ${errors[key] ? 'border-destructive ring-2 ring-destructive/20' : 'border-border/60'} bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring transition-all shadow-sm`;
 
   return (
-    <main className="py-10">
-      <div className="container max-w-4xl">
-        <h1 className="heading-display text-3xl sm:text-4xl mb-8">{t('checkout.title')}</h1>
+    <main className="py-12 bg-gradient-to-b from-background to-secondary/20">
+      <div className="container max-w-6xl">
+        <div className="mb-12">
+          <h1 className="heading-display text-4xl sm:text-5xl mb-3 tracking-tight">{t('checkout.title')}</h1>
+          <p className="text-muted-foreground text-lg">Complete your order details below</p>
+        </div>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-2 space-y-6">
             {/* Customer */}
-            <section className="rounded-xl border border-border bg-card p-6 shadow-sm">
-              <h2 className="font-heading text-xl font-semibold mb-4">{t('checkout.customer')}</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Card className="rounded-2xl border-border/60 shadow-md hover:shadow-lg transition-all duration-300 p-8">
+              <h2 className="font-heading text-2xl font-bold mb-2 tracking-tight">{t('checkout.customer')}</h2>
+              <p className="text-xs text-muted-foreground mb-6">We'll use this to contact you about your order</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="sm:col-span-2">
-                  <label className="block text-sm font-medium mb-1">{t('checkout.name')} *</label>
-                  <input value={form.name} onChange={e => updateField('name', e.target.value)} className={inputCls('name')} />
+                  <label className="block text-sm font-semibold mb-2 text-foreground">{t('checkout.name')} *</label>
+                  <input value={form.name} onChange={e => updateField('name', e.target.value)} className={inputCls('name')} placeholder="John Doe" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">{t('checkout.phone')} *</label>
-                  <input type="tel" value={form.phone} onChange={e => updateField('phone', e.target.value)} className={inputCls('phone')} />
+                  <label className="block text-sm font-semibold mb-2 text-foreground">{t('checkout.phone')} *</label>
+                  <input type="tel" value={form.phone} onChange={e => updateField('phone', e.target.value)} className={inputCls('phone')} placeholder="+995 555 123 456" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">{t('checkout.email')} *</label>
-                  <input type="email" value={form.email} onChange={e => updateField('email', e.target.value)} className={inputCls('email')} />
+                  <label className="block text-sm font-semibold mb-2 text-foreground">{t('checkout.email')} *</label>
+                  <input type="email" value={form.email} onChange={e => updateField('email', e.target.value)} className={inputCls('email')} placeholder="email@example.com" />
                 </div>
               </div>
-            </section>
+            </Card>
 
             {/* Event */}
-            <section className="rounded-xl border border-border bg-card p-6 shadow-sm">
-              <h2 className="font-heading text-xl font-semibold mb-4">{t('checkout.event')}</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <Card className="rounded-2xl border-border/60 shadow-md hover:shadow-lg transition-all duration-300 p-8">
+              <h2 className="font-heading text-2xl font-bold mb-2 tracking-tight">{t('checkout.event')}</h2>
+              <p className="text-xs text-muted-foreground mb-6">When and where is your event?</p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 <div>
-                  <label className="block text-sm font-medium mb-1">{t('checkout.date')} *</label>
+                  <label className="block text-sm font-semibold mb-2 text-foreground">{t('checkout.date')} *</label>
                   <input type="date" value={form.date} onChange={e => updateField('date', e.target.value)} className={inputCls('date')} />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">{t('checkout.startTime')} *</label>
+                  <label className="block text-sm font-semibold mb-2 text-foreground">{t('checkout.startTime')} *</label>
                   <input type="time" value={form.startTime} onChange={e => updateField('startTime', e.target.value)} className={inputCls('startTime')} />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">{t('checkout.endTime')}</label>
+                  <label className="block text-sm font-semibold mb-2 text-foreground">{t('checkout.endTime')}</label>
                   <input type="time" value={form.endTime} onChange={e => updateField('endTime', e.target.value)} className={inputCls('endTime')} />
                 </div>
               </div>
-              <div className="mt-4">
-                <label className="block text-sm font-medium mb-1">{t('checkout.guests')} *</label>
-                <input type="number" min="1" value={form.guests} onChange={e => updateField('guests', parseInt(e.target.value) || 1)} className={inputCls('guests') + ' max-w-[120px]'} />
+              <div className="mt-5">
+                <label className="block text-sm font-semibold mb-2 text-foreground">{t('checkout.guests')} *</label>
+                <input type="number" min="1" value={form.guests} onChange={e => updateField('guests', parseInt(e.target.value) || 1)} className={inputCls('guests') + ' max-w-[140px]'} />
               </div>
-            </section>
+            </Card>
 
             {/* Address */}
-            <section className="rounded-xl border border-border bg-card p-6 shadow-sm">
-              <h2 className="font-heading text-xl font-semibold mb-4">{t('checkout.address')}</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <Card className="rounded-2xl border-border/60 shadow-md hover:shadow-lg transition-all duration-300 p-8">
+              <h2 className="font-heading text-2xl font-bold mb-2 tracking-tight">{t('checkout.address')}</h2>
+              <p className="text-xs text-muted-foreground mb-6">Delivery address in Tbilisi</p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 <div className="sm:col-span-2">
-                  <label className="block text-sm font-medium mb-1">{t('checkout.street')} *</label>
-                  <input value={form.street} onChange={e => updateField('street', e.target.value)} className={inputCls('street')} />
+                  <label className="block text-sm font-semibold mb-2 text-foreground">{t('checkout.street')} *</label>
+                  <input value={form.street} onChange={e => updateField('street', e.target.value)} className={inputCls('street')} placeholder="Rustaveli Avenue" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">{t('checkout.building')} *</label>
-                  <input value={form.building} onChange={e => updateField('building', e.target.value)} className={inputCls('building')} />
+                  <label className="block text-sm font-semibold mb-2 text-foreground">{t('checkout.building')} *</label>
+                  <input value={form.building} onChange={e => updateField('building', e.target.value)} className={inputCls('building')} placeholder="15" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">{t('checkout.apartment')}</label>
-                  <input value={form.apartment} onChange={e => updateField('apartment', e.target.value)} className={inputCls('apartment')} />
+                  <label className="block text-sm font-semibold mb-2 text-foreground">{t('checkout.apartment')}</label>
+                  <input value={form.apartment} onChange={e => updateField('apartment', e.target.value)} className={inputCls('apartment')} placeholder="Apt 5" />
                 </div>
                 <div className="sm:col-span-2">
-                  <label className="block text-sm font-medium mb-1">{t('checkout.addressNotes')}</label>
-                  <input value={form.addressNotes} onChange={e => updateField('addressNotes', e.target.value)} className={inputCls('addressNotes')} />
+                  <label className="block text-sm font-semibold mb-2 text-foreground">{t('checkout.addressNotes')}</label>
+                  <input value={form.addressNotes} onChange={e => updateField('addressNotes', e.target.value)} className={inputCls('addressNotes')} placeholder="Floor 3, ring bell twice" />
                 </div>
               </div>
-            </section>
+            </Card>
 
             {/* Inventory */}
-            <section className="rounded-xl border border-border bg-card p-6 shadow-sm">
-              <h2 className="font-heading text-xl font-semibold mb-1">{t('checkout.inventory')}</h2>
-              <p className="text-xs text-muted-foreground mb-4">{t('checkout.inventoryNote')}</p>
+            <Card className="rounded-2xl border-border/60 shadow-md hover:shadow-lg transition-all duration-300 p-8">
+              <h2 className="font-heading text-2xl font-bold mb-2 tracking-tight">{t('checkout.inventory')}</h2>
+              <p className="text-xs text-muted-foreground mb-6">{t('checkout.inventoryNote')}</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {inventoryKeys.map(key => (
-                  <div key={key} className="flex items-center justify-between rounded-lg border border-border p-3">
-                    <span className="text-sm">{t(`checkout.inventoryItems.${key}`)}</span>
+                  <div key={key} className="flex items-center justify-between rounded-xl border border-border/60 bg-background/50 p-4 hover:border-border hover:shadow-sm transition-all">
+                    <span className="text-sm font-medium">{t(`checkout.inventoryItems.${key}`)}</span>
                     <div className="flex items-center gap-2">
-                      <button type="button" onClick={() => updateInventory(key, inventory[key] - 1)} className="h-7 w-7 rounded border border-border flex items-center justify-center text-sm hover:bg-secondary">−</button>
-                      <span className="w-8 text-center text-sm font-medium">{inventory[key]}</span>
-                      <button type="button" onClick={() => updateInventory(key, inventory[key] + 1)} className="h-7 w-7 rounded border border-border flex items-center justify-center text-sm hover:bg-secondary">+</button>
+                      <button type="button" onClick={() => updateInventory(key, inventory[key] - 1)} className="h-8 w-8 rounded-lg border border-border/60 flex items-center justify-center hover:bg-secondary transition-colors shadow-sm">
+                        <Minus className="h-3.5 w-3.5" />
+                      </button>
+                      <span className="w-10 text-center text-sm font-semibold">{inventory[key]}</span>
+                      <button type="button" onClick={() => updateInventory(key, inventory[key] + 1)} className="h-8 w-8 rounded-lg border border-border/60 flex items-center justify-center hover:bg-secondary transition-colors shadow-sm">
+                        <Plus className="h-3.5 w-3.5" />
+                      </button>
                     </div>
                   </div>
                 ))}
               </div>
-            </section>
+            </Card>
 
             {/* Services */}
-            <section className="rounded-xl border border-border bg-card p-6 shadow-sm">
-              <h2 className="font-heading text-xl font-semibold mb-4">{t('checkout.services')}</h2>
-              <div className="space-y-3">
-                <label className="flex items-center gap-3 cursor-pointer">
-                  <input type="checkbox" checked={services.setup} onChange={e => setServices(s => ({ ...s, setup: e.target.checked }))} className="h-4 w-4 rounded border-border" />
-                  <span className="text-sm">{t('checkout.setup')}</span>
+            <Card className="rounded-2xl border-border/60 shadow-md hover:shadow-lg transition-all duration-300 p-8">
+              <h2 className="font-heading text-2xl font-bold mb-2 tracking-tight">{t('checkout.services')}</h2>
+              <p className="text-xs text-muted-foreground mb-6">Optional professional services</p>
+              <div className="space-y-4">
+                <label className="flex items-start gap-4 cursor-pointer rounded-xl border border-border/60 bg-background/50 p-4 hover:border-border hover:shadow-sm transition-all">
+                  <input type="checkbox" checked={services.setup} onChange={e => setServices(s => ({ ...s, setup: e.target.checked }))} className="mt-0.5 h-5 w-5 rounded-md border-border accent-primary" />
+                  <span className="text-sm font-medium flex-1">{t('checkout.setup')}</span>
                 </label>
-                <label className="flex items-center gap-3 cursor-pointer">
-                  <input type="checkbox" checked={services.serving} onChange={e => setServices(s => ({ ...s, serving: e.target.checked }))} className="h-4 w-4 rounded border-border" />
-                  <span className="text-sm">{t('checkout.serving')}</span>
+                <label className="flex items-start gap-4 cursor-pointer rounded-xl border border-border/60 bg-background/50 p-4 hover:border-border hover:shadow-sm transition-all">
+                  <input type="checkbox" checked={services.serving} onChange={e => setServices(s => ({ ...s, serving: e.target.checked }))} className="mt-0.5 h-5 w-5 rounded-md border-border accent-primary" />
+                  <span className="text-sm font-medium flex-1">{t('checkout.serving')}</span>
                 </label>
               </div>
-            </section>
+            </Card>
 
             {/* Notes */}
-            <section className="rounded-xl border border-border bg-card p-6 shadow-sm space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">{t('checkout.dietary')}</label>
-                <textarea value={form.dietary} onChange={e => updateField('dietary', e.target.value)} rows={2} className={inputCls('dietary') + ' resize-none'} />
+            <Card className="rounded-2xl border-border/60 shadow-md hover:shadow-lg transition-all duration-300 p-8">
+              <h2 className="font-heading text-2xl font-bold mb-2 tracking-tight">Additional Information</h2>
+              <p className="text-xs text-muted-foreground mb-6">Let us know about any special requirements</p>
+              <div className="space-y-5">
+                <div>
+                  <label className="block text-sm font-semibold mb-2 text-foreground">{t('checkout.dietary')}</label>
+                  <textarea value={form.dietary} onChange={e => updateField('dietary', e.target.value)} rows={3} className={inputCls('dietary') + ' resize-none'} placeholder="Allergies, dietary restrictions..." />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-2 text-foreground">{t('checkout.comments')}</label>
+                  <textarea value={form.comments} onChange={e => updateField('comments', e.target.value)} rows={3} className={inputCls('comments') + ' resize-none'} placeholder="Any special requests or notes..." />
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">{t('checkout.comments')}</label>
-                <textarea value={form.comments} onChange={e => updateField('comments', e.target.value)} rows={2} className={inputCls('comments') + ' resize-none'} />
-              </div>
-            </section>
+            </Card>
 
             {/* Privacy */}
-            <label className={`flex items-start gap-3 cursor-pointer ${errors.privacy ? 'text-destructive' : ''}`}>
-              <input type="checkbox" checked={form.privacy} onChange={e => updateField('privacy', e.target.checked)} className="mt-1 h-4 w-4 rounded border-border" />
-              <span className="text-sm">{t('checkout.privacy')} *</span>
-            </label>
+            <Card className={`rounded-2xl border shadow-md p-6 transition-all ${errors.privacy ? 'border-destructive bg-destructive/5' : 'border-border/60 bg-card'}`}>
+              <label className="flex items-start gap-4 cursor-pointer">
+                <input type="checkbox" checked={form.privacy} onChange={e => updateField('privacy', e.target.checked)} className="mt-0.5 h-5 w-5 rounded-md border-border accent-primary" />
+                <span className={`text-sm font-medium ${errors.privacy ? 'text-destructive' : 'text-foreground'}`}>{t('checkout.privacy')} *</span>
+              </label>
+            </Card>
           </div>
 
           {/* Order Summary Sidebar */}
           <div className="lg:col-span-1">
-            <div className="rounded-xl border border-border bg-card p-6 shadow-sm sticky top-20 space-y-4">
-              <h3 className="font-heading text-xl font-semibold">{t('checkout.orderSummary')}</h3>
-              {items.length > 0 && (
-                <div className="space-y-2 text-sm">
-                  {items.map(item => {
-                    const p = getProduct(item.productId);
-                    if (!p) return null;
-                    return (
-                      <div key={item.productId} className="flex justify-between">
-                        <span className="text-muted-foreground truncate mr-2">{(p.name[lang] || p.name.en)} ×{item.quantity}</span>
-                        <span className="font-medium whitespace-nowrap">{(p.price * item.quantity).toFixed(2)}₾</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-              <div className="border-t border-border pt-3 space-y-2 text-sm">
-                <div className="flex justify-between"><span className="text-muted-foreground">{t('checkout.foodSubtotal')}</span><span>{cartSubtotal.toFixed(2)}₾</span></div>
-                {inventorySubtotal > 0 && <div className="flex justify-between"><span className="text-muted-foreground">{t('checkout.inventorySubtotal')}</span><span>{inventorySubtotal.toFixed(2)}₾</span></div>}
-                {servicesTotal > 0 && <div className="flex justify-between"><span className="text-muted-foreground">{t('checkout.servicesSubtotal')}</span><span>{servicesTotal.toFixed(2)}₾</span></div>}
-                <div className="flex justify-between"><span className="text-muted-foreground">{t('cart.delivery')}</span><span>{deliveryFee === 0 ? t('cart.deliveryFree') : `${deliveryFee}₾`}</span></div>
-                <div className="border-t border-border pt-2 flex justify-between text-base font-bold"><span>{t('cart.total')}</span><span className="text-primary">{grandTotal.toFixed(2)}₾</span></div>
+            <Card className="rounded-2xl border-border/60 shadow-lg sticky top-24 overflow-hidden">
+              <div className="bg-gradient-to-br from-primary/5 to-accent/5 p-8 border-b border-border/50">
+                <h3 className="font-heading text-2xl font-bold tracking-tight">{t('checkout.orderSummary')}</h3>
               </div>
-              <button
-                type="submit"
-                disabled={submitting}
-                className="w-full rounded-lg bg-accent py-3 font-semibold text-accent-foreground hover:bg-accent/90 transition-colors disabled:opacity-50"
-              >
-                {submitting ? t('common.loading') : t('checkout.submit')}
-              </button>
-            </div>
+              
+              <div className="p-8 space-y-6">
+                {/* Cart Items */}
+                {items.length > 0 && (
+                  <div className="space-y-3">
+                    {items.map(item => {
+                      const p = getProduct(item.productId);
+                      if (!p) return null;
+                      return (
+                        <div key={item.productId} className="flex justify-between items-start gap-3 py-2">
+                          <span className="text-sm text-muted-foreground flex-1 leading-relaxed">
+                            {(p.name[lang] || p.name.en)} <span className="font-semibold text-foreground">×{item.quantity}</span>
+                          </span>
+                          <span className="font-semibold text-sm whitespace-nowrap">{(p.price * item.quantity).toFixed(2)}₾</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+
+                <Separator className="my-4" />
+
+                {/* Totals */}
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground font-medium">{t('checkout.foodSubtotal')}</span>
+                    <span className="font-semibold">{cartSubtotal.toFixed(2)}₾</span>
+                  </div>
+                  {inventorySubtotal > 0 && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground font-medium">{t('checkout.inventorySubtotal')}</span>
+                      <span className="font-semibold">{inventorySubtotal.toFixed(2)}₾</span>
+                    </div>
+                  )}
+                  {servicesTotal > 0 && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground font-medium">{t('checkout.servicesSubtotal')}</span>
+                      <span className="font-semibold">{servicesTotal.toFixed(2)}₾</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground font-medium">{t('cart.delivery')}</span>
+                    <span className="font-semibold">{deliveryFee === 0 ? t('cart.deliveryFree') : `${deliveryFee}₾`}</span>
+                  </div>
+                </div>
+
+                <Separator className="my-4" />
+
+                {/* Grand Total */}
+                <div className="flex justify-between items-center py-3 px-4 rounded-xl bg-primary/5">
+                  <span className="font-bold text-lg">{t('cart.total')}</span>
+                  <span className="font-bold text-2xl text-primary">{grandTotal.toFixed(2)}₾</span>
+                </div>
+
+                {/* Submit Button */}
+                <Button
+                  type="submit"
+                  disabled={submitting}
+                  className="w-full rounded-xl bg-accent text-neutral-900 hover:bg-accent/90 hover:shadow-xl transition-all duration-200 active:scale-95 py-6 text-base font-bold disabled:opacity-50"
+                  size="lg"
+                >
+                  {submitting ? t('common.loading') : t('checkout.submit')}
+                </Button>
+              </div>
+            </Card>
           </div>
         </form>
       </div>
