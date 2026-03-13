@@ -54,9 +54,15 @@ const ProductCard: React.FC<Props> = ({ product, onDetails, guestCount = 1 }) =>
         >
           <span className="opacity-90 group-hover:scale-110 transition-transform duration-300">{
             product.category === 'canapes' ? '🥪' :
+            product.category === 'burgers' ? '🍔' :
+            product.category === 'pizza' ? '🍕' :
+            product.category === 'sandwiches' ? '🥖' :
             product.category === 'salads' ? '🥗' :
             product.category === 'hot' ? '🍖' :
-            product.category === 'desserts' ? '🍰' : '🥂'
+            product.category === 'desserts' ? '🍰' :
+            product.category === 'drinks' ? '🥤' :
+            product.category === 'sauces' ? '🥫' :
+            product.category === 'inventory' ? '🍴' : '📦'
           }</span>
         </div>
       </button>

@@ -47,9 +47,15 @@ const ProductModal: React.FC<Props> = ({ product, onClose, guestCount = 1 }) => 
         <div className="h-64 w-full flex items-center justify-center text-8xl relative overflow-hidden" style={{ background: product.gradient }}>
           <span className="opacity-90">{
             product.category === 'canapes' ? '🥪' :
+            product.category === 'burgers' ? '🍔' :
+            product.category === 'pizza' ? '🍕' :
+            product.category === 'sandwiches' ? '🥖' :
             product.category === 'salads' ? '🥗' :
             product.category === 'hot' ? '🍖' :
-            product.category === 'desserts' ? '🍰' : '🥂'
+            product.category === 'desserts' ? '🍰' :
+            product.category === 'drinks' ? '🥤' :
+            product.category === 'sauces' ? '🥫' :
+            product.category === 'inventory' ? '🍴' : '📦'
           }</span>
           
           {/* Badges on image */}
