@@ -8,6 +8,7 @@ export interface Product {
   unit: 'piece' | 'tray' | 'person' | 'liter' | 'kg';
   popular?: boolean;
   gradient: string;
+  image?: string;
 }
 
 export const categories = [
@@ -32,6 +33,7 @@ export const products: Product[] = [
     description: { ka: 'ტრადიციული ქართული ხაჭაპური იმერული ყველით', en: 'Traditional Georgian cheese bread with Imeruli cheese', ru: 'Традиционный грузинский хлеб с сыром имерули' },
     category: 'canapes', tags: ['popular'], price: 2.10, unit: 'piece', popular: true,
     gradient: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)',
+    image: '/images/menu/khachapuri.jpg',
   },
   {
     id: 'eggplant-walnut-skewer',
@@ -39,6 +41,7 @@ export const products: Product[] = [
     description: { ka: 'შემწვარი ბადრიჯანი ნიგვზის საწებელით', en: 'Grilled eggplant with walnut paste', ru: 'Жареный баклажан с ореховой пастой' },
     category: 'canapes', tags: ['vegan'], price: 3.55, unit: 'piece',
     gradient: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+    image: '/images/menu/eggplant-skewer.jpg',
   },
   {
     id: 'bruschetta-tomato-cherry',
@@ -46,6 +49,7 @@ export const products: Product[] = [
     description: { ka: 'სამარხვო ბრუსკეტა ახალი ნივრითა და ჩერით', en: 'Vegan bruschetta with fresh garlic and cherry tomatoes', ru: 'Веганская брускетта со свежим чесноком и черри' },
     category: 'canapes', tags: ['vegan'], price: 1.85, unit: 'piece',
     gradient: 'linear-gradient(135deg, #96e6a1 0%, #d4fc79 100%)',
+    image: '/images/menu/bruschetta-tomato.jpg',
   },
   {
     id: 'bruschetta-guacamole',
@@ -53,6 +57,7 @@ export const products: Product[] = [
     description: { ka: 'ბრუსკეტა ახალი გუაკამოლეთი', en: 'Bruschetta with fresh guacamole', ru: 'Брускетта со свежим гуакамоле' },
     category: 'canapes', tags: ['vegan'], price: 4.95, unit: 'piece',
     gradient: 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)',
+    image: '/images/menu/bruschetta-guacamole.jpg',
   },
   {
     id: 'bruschetta-cream-cheese-salmon',
@@ -60,6 +65,7 @@ export const products: Product[] = [
     description: { ka: 'ბრუსკეტა კრემ-ყველითა და ორაგულით', en: 'Bruschetta with cream cheese and salmon', ru: 'Брускетта с кремом и лососем' },
     category: 'canapes', tags: ['popular'], price: 4.60, unit: 'piece',
     gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    image: '/images/menu/bruschetta-salmon.jpg',
   },
   {
     id: 'bruschetta-mushroom-onion',
@@ -67,6 +73,7 @@ export const products: Product[] = [
     description: { ka: 'ბრუსკეტა სოკოთი და ტკბილი ხახვით', en: 'Bruschetta with mushrooms and sweet caramelized onion', ru: 'Брускетта с грибами и сладким луком' },
     category: 'canapes', tags: ['vegan'], price: 2.60, unit: 'piece',
     gradient: 'linear-gradient(135deg, #d4a574 0%, #a0845c 100%)',
+    image: '/images/menu/bruschetta-mushroom.jpg',
   },
   {
     id: 'veggie-skewer',
@@ -74,6 +81,7 @@ export const products: Product[] = [
     description: { ka: 'ახალი ბოსტნეული ჩხირზე', en: 'Fresh vegetables on skewer', ru: 'Свежие овощи на шпажке' },
     category: 'canapes', tags: ['vegan', 'glutenFree'], price: 1.60, unit: 'piece',
     gradient: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+    image: '/images/menu/veggie-skewer.jpg',
   },
 
   // ბურგერები (Burgers)
@@ -83,6 +91,7 @@ export const products: Product[] = [
     description: { ka: 'მინი ბურგერი ქათმის კოტლეტით', en: 'Mini burger with chicken patty', ru: 'Мини бургер с куриной котлетой' },
     category: 'burgers', tags: ['popular'], price: 5.20, unit: 'piece', popular: true,
     gradient: 'linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)',
+    image: '/images/menu/mini-chicken-burger.jpg',
   },
   {
     id: 'mini-beef-burger',
@@ -90,6 +99,7 @@ export const products: Product[] = [
     description: { ka: 'მინი ბურგერი საქონლის კოტლეტით', en: 'Mini burger with beef patty', ru: 'Мини бургер с говяжьей котлетой' },
     category: 'burgers', tags: ['popular'], price: 6.90, unit: 'piece',
     gradient: 'linear-gradient(135deg, #c471f5 0%, #fa71cd 100%)',
+    image: '/images/menu/mini-beef-burger.jpg',
   },
 
   // პიცა (Pizza)
@@ -99,6 +109,7 @@ export const products: Product[] = [
     description: { ka: 'მინი პიცა პეპერონით', en: 'Mini pizza with pepperoni', ru: 'Мини пицца с пепперони' },
     category: 'pizza', tags: ['popular'], price: 3.25, unit: 'piece',
     gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+    image: '/images/menu/mini-pizza-pepperoni.jpg',
   },
   {
     id: 'mini-pizza-4cheese',
@@ -106,6 +117,7 @@ export const products: Product[] = [
     description: { ka: 'მინი პიცა ოთხი სახეობის ყველით', en: 'Mini pizza with four types of cheese', ru: 'Мини пицца с четырьмя видами сыра' },
     category: 'pizza', tags: [], price: 4.20, unit: 'piece',
     gradient: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)',
+    image: '/images/menu/mini-pizza-cheese.jpg',
   },
   {
     id: 'mini-pizza-margherita',
@@ -113,6 +125,7 @@ export const products: Product[] = [
     description: { ka: 'კლასიკური მარგარიტა პიცა', en: 'Classic Margherita pizza', ru: 'Классическая пицца маргарита' },
     category: 'pizza', tags: ['vegan'], price: 2.50, unit: 'piece',
     gradient: 'linear-gradient(135deg, #fddb92 0%, #d1fdff 100%)',
+    image: '/images/menu/mini-pizza-cheese.jpg',
   },
 
   // სენდვიჩები (Sandwiches)
@@ -122,6 +135,7 @@ export const products: Product[] = [
     description: { ka: 'მინი სენდვიჩი ქათმის სალათით', en: 'Mini sandwich with chicken salad', ru: 'Мини сэндвич с куриным салатом' },
     category: 'sandwiches', tags: [], price: 3.70, unit: 'piece',
     gradient: 'linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)',
+    image: '/images/menu/mini-sandwich.jpg',
   },
   {
     id: 'mini-sandwich-veggie',
@@ -129,6 +143,7 @@ export const products: Product[] = [
     description: { ka: 'მინი სენდვიჩი ახალი ბოსტნეულით', en: 'Mini sandwich with fresh vegetables', ru: 'Мини сэндвич со свежими овощами' },
     category: 'sandwiches', tags: ['vegan'], price: 1.85, unit: 'piece',
     gradient: 'linear-gradient(135deg, #96e6a1 0%, #d4fc79 100%)',
+    image: '/images/menu/mini-sandwich.jpg',
   },
   {
     id: 'mini-sandwich-salami',
@@ -136,6 +151,7 @@ export const products: Product[] = [
     description: { ka: 'მინი სენდვიჩი სალიამით', en: 'Mini sandwich with salami', ru: 'Мини сэндвич с салями' },
     category: 'sandwiches', tags: [], price: 2.70, unit: 'piece',
     gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    image: '/images/menu/mini-sandwich.jpg',
   },
   {
     id: 'mini-sandwich-veggie-cheese',
@@ -143,6 +159,7 @@ export const products: Product[] = [
     description: { ka: 'მინი სენდვიჩი ბოსტნეულითა და ყველით', en: 'Mini sandwich with vegetables and cheese', ru: 'Мини сэндвич с овощами и сыром' },
     category: 'sandwiches', tags: ['vegan'], price: 2.50, unit: 'piece',
     gradient: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+    image: '/images/menu/mini-sandwich.jpg',
   },
   {
     id: 'hotdog',
@@ -150,6 +167,7 @@ export const products: Product[] = [
     description: { ka: 'კლასიკური ჰოთ-დოგი', en: 'Classic hot dog', ru: 'Классический хот-дог' },
     category: 'sandwiches', tags: [], price: 2.75, unit: 'piece',
     gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+    image: '/images/menu/hotdog.jpg',
   },
 
   // სალათები (Salads)
@@ -159,6 +177,7 @@ export const products: Product[] = [
     description: { ka: 'ახალი ბოსტნეული ფეტა ყველით', en: 'Fresh vegetables with feta cheese', ru: 'Свежие овощи с сыром фета' },
     category: 'salads', tags: ['vegan', 'glutenFree'], price: 4.95, unit: 'piece',
     gradient: 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)',
+    image: '/images/menu/greek-salad.jpg',
   },
   {
     id: 'caesar-salad',
@@ -166,6 +185,7 @@ export const products: Product[] = [
     description: { ka: 'კლასიკური ცეზარი ქათმით', en: 'Classic Caesar with chicken', ru: 'Классический Цезарь с курицей' },
     category: 'salads', tags: ['popular'], price: 6.60, unit: 'piece', popular: true,
     gradient: 'linear-gradient(135deg, #96e6a1 0%, #d4fc79 100%)',
+    image: '/images/menu/caesar-salad.jpg',
   },
 
   // ცხელი კერძები (Hot Dishes)
@@ -175,6 +195,7 @@ export const products: Product[] = [
     description: { ka: 'შემწვარი ქათმის ღვეზელი', en: 'Grilled chicken wing', ru: 'Жареное куриное крылышко' },
     category: 'hot', tags: ['glutenFree'], price: 1.80, unit: 'piece',
     gradient: 'linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)',
+    image: '/images/menu/chicken-wing.jpg',
   },
   {
     id: 'french-fries',
@@ -182,6 +203,7 @@ export const products: Product[] = [
     description: { ka: 'ოქროსფერი კარტოფილი ფრი', en: 'Golden French fries', ru: 'Золотистый картофель фри' },
     category: 'hot', tags: ['vegan'], price: 3.50, unit: 'piece',
     gradient: 'linear-gradient(135deg, #fddb92 0%, #d1fdff 100%)',
+    image: '/images/menu/french-fries.jpg',
   },
   {
     id: 'cheese-balls',
@@ -189,6 +211,7 @@ export const products: Product[] = [
     description: { ka: 'ხრაშუნა ყველის ბურთები', en: 'Crispy cheese balls', ru: 'Хрустящие сырные шарики' },
     category: 'hot', tags: [], price: 1.95, unit: 'piece',
     gradient: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)',
+    image: '/images/menu/cheese-balls.jpg',
   },
   {
     id: 'mini-kebab-skewer',
@@ -196,6 +219,7 @@ export const products: Product[] = [
     description: { ka: 'მინი ქაბაბი ჩხირზე', en: 'Mini kebab on skewer', ru: 'Мини кебаб на шпажке' },
     category: 'hot', tags: ['popular'], price: 3.85, unit: 'piece',
     gradient: 'linear-gradient(135deg, #c471f5 0%, #fa71cd 100%)',
+    image: '/images/menu/mini-kebab.jpg',
   },
   {
     id: 'chicken-balls',
@@ -203,6 +227,7 @@ export const products: Product[] = [
     description: { ka: 'ქათმის ხორცის ბურთები', en: 'Chicken meatballs', ru: 'Куриные фрикадельки' },
     category: 'hot', tags: [], price: 2.85, unit: 'piece',
     gradient: 'linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)',
+    image: '/images/menu/chicken-balls.jpg',
   },
   {
     id: 'chicken-skewer',
@@ -210,6 +235,7 @@ export const products: Product[] = [
     description: { ka: 'ქათმის მწვადი ჩხირზე', en: 'Chicken kebab on skewer', ru: 'Куриный шашлык на шпажке' },
     category: 'hot', tags: ['glutenFree'], price: 3.55, unit: 'piece',
     gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+    image: '/images/menu/meat-skewer.jpg',
   },
   {
     id: 'pork-skewer',
@@ -217,6 +243,7 @@ export const products: Product[] = [
     description: { ka: 'ღორის მწვადი ჩხირზე', en: 'Pork kebab on skewer', ru: 'Свиной шашлык на шпажке' },
     category: 'hot', tags: ['glutenFree'], price: 4.70, unit: 'piece',
     gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    image: '/images/menu/meat-skewer.jpg',
   },
 
   // დესერტები (Desserts)
@@ -226,6 +253,7 @@ export const products: Product[] = [
     description: { ka: 'ფრანგული ეკლერი კრემით', en: 'French eclair with cream', ru: 'Французский эклер с кремом' },
     category: 'desserts', tags: ['popular'], price: 2.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    image: '/images/menu/eclair.jpg',
   },
   {
     id: 'chocolate-muffin',
@@ -233,6 +261,7 @@ export const products: Product[] = [
     description: { ka: 'შოკოლადის მაფინი', en: 'Chocolate muffin', ru: 'Шоколадный маффин' },
     category: 'desserts', tags: [], price: 2.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #3c1053 0%, #ad5389 100%)',
+    image: '/images/menu/chocolate-muffin.jpg',
   },
   {
     id: 'chocolate-cake-12',
@@ -240,6 +269,7 @@ export const products: Product[] = [
     description: { ka: 'შოკოლადის ტორტი 12 ნაჭრად', en: 'Chocolate cake for 12 slices', ru: 'Шоколадный торт на 12 кусков' },
     category: 'desserts', tags: ['popular'], price: 40.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #3c1053 0%, #ad5389 100%)',
+    image: '/images/menu/chocolate-cake.jpg',
   },
   {
     id: 'chocolate-cake-25',
@@ -247,6 +277,7 @@ export const products: Product[] = [
     description: { ka: 'შოკოლადის ტორტი 25 ნაჭრად', en: 'Chocolate cake for 25 slices', ru: 'Шоколадный торт на 25 кусков' },
     category: 'desserts', tags: [], price: 105.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    image: '/images/menu/chocolate-cake.jpg',
   },
   {
     id: 'fruit-platter-10',
@@ -254,6 +285,7 @@ export const products: Product[] = [
     description: { ka: 'ხილის ასორტი 10 პერსონაზე', en: 'Fruit assortment for 10 people', ru: 'Фруктовое ассорти на 10 человек' },
     category: 'desserts', tags: ['vegan', 'glutenFree'], price: 25.00, unit: 'person',
     gradient: 'linear-gradient(135deg, #f6d365 0%, #96e6a1 100%)',
+    image: '/images/menu/fruit-platter.jpg',
   },
   {
     id: 'fruit-platter-20',
@@ -261,6 +293,7 @@ export const products: Product[] = [
     description: { ka: 'ხილის ასორტი 20 პერსონაზე', en: 'Fruit assortment for 20 people', ru: 'Фруктовое ассорти на 20 человек' },
     category: 'desserts', tags: ['vegan', 'glutenFree'], price: 75.00, unit: 'person',
     gradient: 'linear-gradient(135deg, #f6d365 0%, #96e6a1 100%)',
+    image: '/images/menu/fruit-platter.jpg',
   },
   {
     id: 'fruit-platter-30',
@@ -268,6 +301,7 @@ export const products: Product[] = [
     description: { ka: 'ხილის ასორტი 30 პერსონაზე', en: 'Fruit assortment for 30 people', ru: 'Фруктовое ассорти на 30 человек' },
     category: 'desserts', tags: ['vegan', 'glutenFree'], price: 75.00, unit: 'person',
     gradient: 'linear-gradient(135deg, #f6d365 0%, #96e6a1 100%)',
+    image: '/images/menu/fruit-platter.jpg',
   },
   {
     id: 'fruit-platter-50',
@@ -275,6 +309,7 @@ export const products: Product[] = [
     description: { ka: 'ხილის ასორტი 50 პერსონაზე', en: 'Fruit assortment for 50 people', ru: 'Фруктовое ассорти на 50 человек' },
     category: 'desserts', tags: ['vegan', 'glutenFree'], price: 125.00, unit: 'person',
     gradient: 'linear-gradient(135deg, #f6d365 0%, #96e6a1 100%)',
+    image: '/images/menu/fruit-platter.jpg',
   },
 
   // სასმელები (Drinks)
@@ -284,6 +319,7 @@ export const products: Product[] = [
     description: { ka: 'გაზიანი სასმელი 0.5 ლიტრი', en: 'Carbonated drink 0.5 liter', ru: 'Газированный напиток 0.5 литра' },
     category: 'drinks', tags: [], price: 3.50, unit: 'piece',
     gradient: 'linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)',
+    image: '/images/menu/soda.jpg',
   },
   {
     id: 'soda-2l',
@@ -291,6 +327,7 @@ export const products: Product[] = [
     description: { ka: 'გაზიანი სასმელი 2 ლიტრი', en: 'Carbonated drink 2 liters', ru: 'Газированный напиток 2 литра' },
     category: 'drinks', tags: [], price: 7.50, unit: 'piece',
     gradient: 'linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)',
+    image: '/images/menu/soda.jpg',
   },
   {
     id: 'sparkling-water-05l',
@@ -298,6 +335,7 @@ export const products: Product[] = [
     description: { ka: 'გაზიანი მინერალური წყალი', en: 'Sparkling mineral water', ru: 'Газированная минеральная вода' },
     category: 'drinks', tags: [], price: 2.50, unit: 'piece',
     gradient: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+    image: '/images/menu/soda.jpg',
   },
   {
     id: 'mineral-water',
@@ -305,6 +343,7 @@ export const products: Product[] = [
     description: { ka: 'მინერალური წყალი', en: 'Mineral water', ru: 'Минеральная вода' },
     category: 'drinks', tags: [], price: 1.50, unit: 'piece',
     gradient: 'linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)',
+    image: '/images/menu/soda.jpg',
   },
   {
     id: 'juice-peach',
@@ -312,6 +351,7 @@ export const products: Product[] = [
     description: { ka: 'ნატურალური ატმის წვენი', en: 'Natural peach juice', ru: 'Натуральный персиковый сок' },
     category: 'drinks', tags: ['vegan'], price: 8.45, unit: 'piece',
     gradient: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)',
+    image: '/images/menu/juice.jpg',
   },
   {
     id: 'juice-orange',
@@ -319,6 +359,7 @@ export const products: Product[] = [
     description: { ka: 'ნატურალური ბროწეულის წვენი', en: 'Natural orange juice', ru: 'Натуральный апельсиновый сок' },
     category: 'drinks', tags: ['vegan'], price: 8.45, unit: 'piece',
     gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+    image: '/images/menu/juice.jpg',
   },
   {
     id: 'juice-apple',
@@ -326,6 +367,7 @@ export const products: Product[] = [
     description: { ka: 'ნატურალური ვაშლის წვენი', en: 'Natural apple juice', ru: 'Натуральный яблочный сок' },
     category: 'drinks', tags: ['vegan'], price: 8.45, unit: 'piece',
     gradient: 'linear-gradient(135deg, #96e6a1 0%, #d4fc79 100%)',
+    image: '/images/menu/juice.jpg',
   },
   {
     id: 'cream',
@@ -333,6 +375,7 @@ export const products: Product[] = [
     description: { ka: 'ნაღები ყავისთვის', en: 'Cream for coffee', ru: 'Сливки для кофе' },
     category: 'drinks', tags: [], price: 10.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+    image: '/images/menu/coffee.jpg',
   },
   {
     id: 'milk',
@@ -340,6 +383,7 @@ export const products: Product[] = [
     description: { ka: 'რძე', en: 'Milk', ru: 'Молоко' },
     category: 'drinks', tags: [], price: 8.50, unit: 'piece',
     gradient: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+    image: '/images/menu/coffee.jpg',
   },
   {
     id: 'white-wine',
@@ -347,6 +391,7 @@ export const products: Product[] = [
     description: { ka: 'თეთრი ღვინო', en: 'White wine', ru: 'Белое вино' },
     category: 'drinks', tags: [], price: 34.75, unit: 'piece',
     gradient: 'linear-gradient(135deg, #f6d365 0%, #96e6a1 100%)',
+    image: '/images/menu/wine.jpg',
   },
   {
     id: 'red-wine',
@@ -354,6 +399,7 @@ export const products: Product[] = [
     description: { ka: 'წითელი ღვინო', en: 'Red wine', ru: 'Красное вино' },
     category: 'drinks', tags: ['popular'], price: 34.75, unit: 'piece',
     gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    image: '/images/menu/wine.jpg',
   },
   {
     id: 'semi-sweet-wine',
@@ -361,6 +407,7 @@ export const products: Product[] = [
     description: { ka: 'შუშხუნა ღვინო', en: 'Semi-sweet wine', ru: 'Полусладкое вино' },
     category: 'drinks', tags: [], price: 20.45, unit: 'piece',
     gradient: 'linear-gradient(135deg, #c471f5 0%, #fa71cd 100%)',
+    image: '/images/menu/wine.jpg',
   },
   {
     id: 'coffee',
@@ -368,6 +415,7 @@ export const products: Product[] = [
     description: { ka: 'ყავა', en: 'Coffee', ru: 'Кофе' },
     category: 'drinks', tags: [], price: 3.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #d4a574 0%, #a0845c 100%)',
+    image: '/images/menu/coffee.jpg',
   },
   {
     id: 'tea',
@@ -375,6 +423,7 @@ export const products: Product[] = [
     description: { ka: 'ჩაი', en: 'Tea', ru: 'Чай' },
     category: 'drinks', tags: [], price: 3.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #96e6a1 0%, #d4fc79 100%)',
+    image: '/images/menu/tea.jpg',
   },
   {
     id: 'sugar',
@@ -382,6 +431,7 @@ export const products: Product[] = [
     description: { ka: 'შაქარი', en: 'Sugar', ru: 'Сахар' },
     category: 'drinks', tags: [], price: 0.50, unit: 'piece',
     gradient: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+    image: '/images/menu/coffee.jpg',
   },
   {
     id: 'water-boiler',
@@ -389,6 +439,7 @@ export const products: Product[] = [
     description: { ka: 'წყლის მადუღარა', en: 'Water boiler', ru: 'Кипятильник для воды' },
     category: 'drinks', tags: [], price: 20.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)',
+    image: '/images/menu/water-boiler.jpg',
   },
   {
     id: 'juice-pitcher',
@@ -396,6 +447,7 @@ export const products: Product[] = [
     description: { ka: 'შუშის დოქი წვენისთვის', en: 'Glass pitcher for juice', ru: 'Стеклянный кувшин для сока' },
     category: 'drinks', tags: [], price: 10.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+    image: '/images/menu/water-boiler.jpg',
   },
 
   // ინვენტარი (Inventory/Equipment)
@@ -405,6 +457,7 @@ export const products: Product[] = [
     description: { ka: 'მაგიდა გადასაფარებლით', en: 'Table with tablecloth', ru: 'Стол со скатертью' },
     category: 'inventory', tags: [], price: 55.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)',
+    image: '/images/menu/table-setup.jpg',
   },
   {
     id: 'cocktail-table-with-cover',
@@ -412,6 +465,7 @@ export const products: Product[] = [
     description: { ka: 'კოქტეილის მაგიდა გადასაფარებლით', en: 'Cocktail table with cover', ru: 'Коктейльный стол с покрытием' },
     category: 'inventory', tags: [], price: 65.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    image: '/images/menu/table-setup.jpg',
   },
   {
     id: 'tablecloth',
@@ -419,6 +473,7 @@ export const products: Product[] = [
     description: { ka: 'მაგიდის გადასაფარებელი', en: 'Table cover', ru: 'Скатерть для стола' },
     category: 'inventory', tags: [], price: 20.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+    image: '/images/menu/table-setup.jpg',
   },
   {
     id: 'chair',
@@ -426,6 +481,7 @@ export const products: Product[] = [
     description: { ka: 'სკამი', en: 'Chair', ru: 'Стул' },
     category: 'inventory', tags: [], price: 10.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)',
+    image: '/images/menu/table-setup.jpg',
   },
 
   // ფურშეტის ნივთები (Catering Items)
@@ -435,6 +491,7 @@ export const products: Product[] = [
     description: { ka: 'მუყაოს ყუთი', en: 'Cardboard box', ru: 'Картонная коробка' },
     category: 'catering-items', tags: [], price: 2.20, unit: 'piece',
     gradient: 'linear-gradient(135deg, #d4a574 0%, #a0845c 100%)',
+    image: '/images/menu/catering-supplies.jpg',
   },
   {
     id: 'catering-plate',
@@ -442,6 +499,7 @@ export const products: Product[] = [
     description: { ka: 'ფურშეტის თეფში', en: 'Buffet serving plate', ru: 'Тарелка для фуршета' },
     category: 'catering-items', tags: [], price: 1.50, unit: 'piece',
     gradient: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+    image: '/images/menu/catering-supplies.jpg',
   },
   {
     id: 'catering-plate-cardboard',
@@ -449,6 +507,7 @@ export const products: Product[] = [
     description: { ka: 'ფურშეტის თეფში მუყაოს', en: 'Cardboard buffet plate', ru: 'Картонная тарелка для фуршета' },
     category: 'catering-items', tags: [], price: 5.50, unit: 'piece',
     gradient: 'linear-gradient(135deg, #d4a574 0%, #a0845c 100%)',
+    image: '/images/menu/catering-supplies.jpg',
   },
   {
     id: 'wooden-knife',
@@ -456,6 +515,7 @@ export const products: Product[] = [
     description: { ka: 'ხის ერთჯერადი დანა', en: 'Wooden disposable knife', ru: 'Деревянный одноразовый нож' },
     category: 'catering-items', tags: [], price: 0.55, unit: 'piece',
     gradient: 'linear-gradient(135deg, #d4a574 0%, #a0845c 100%)',
+    image: '/images/menu/catering-supplies.jpg',
   },
   {
     id: 'coffee-cup-cardboard',
@@ -463,6 +523,7 @@ export const products: Product[] = [
     description: { ka: 'მუყაოს ერთჯერადი ყავის ჭიქა', en: 'Cardboard disposable coffee cup', ru: 'Картонная одноразовая чашка' },
     category: 'catering-items', tags: [], price: 0.60, unit: 'piece',
     gradient: 'linear-gradient(135deg, #d4a574 0%, #a0845c 100%)',
+    image: '/images/menu/catering-supplies.jpg',
   },
   {
     id: 'napkin',
@@ -470,6 +531,7 @@ export const products: Product[] = [
     description: { ka: 'ხელსახოცი', en: 'Paper napkin', ru: 'Бумажная салфетка' },
     category: 'catering-items', tags: [], price: 4.50, unit: 'piece',
     gradient: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+    image: '/images/menu/catering-supplies.jpg',
   },
   {
     id: 'knife',
@@ -477,6 +539,7 @@ export const products: Product[] = [
     description: { ka: 'დანა', en: 'Knife', ru: 'Нож' },
     category: 'catering-items', tags: [], price: 1.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)',
+    image: '/images/menu/catering-supplies.jpg',
   },
   {
     id: 'wine-glass-crystal',
@@ -484,6 +547,7 @@ export const products: Product[] = [
     description: { ka: 'ერთჯერადი კრისტალის არყის ჭიქა', en: 'Disposable crystal brandy glass', ru: 'Одноразовый хрустальный бокал' },
     category: 'catering-items', tags: [], price: 0.80, unit: 'piece',
     gradient: 'linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)',
+    image: '/images/menu/glassware.jpg',
   },
   {
     id: 'whiskey-glass-crystal',
@@ -491,6 +555,7 @@ export const products: Product[] = [
     description: { ka: 'ერთჯერადი კრისტალის ვისკის ჭიქა', en: 'Disposable crystal whiskey glass', ru: 'Одноразовый хрустальный стакан' },
     category: 'catering-items', tags: [], price: 0.80, unit: 'piece',
     gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    image: '/images/menu/glassware.jpg',
   },
   {
     id: 'cognac-glass-crystal',
@@ -498,6 +563,7 @@ export const products: Product[] = [
     description: { ka: 'ერთჯერადი კრისტალის კონიაკის ჭიქა', en: 'Disposable crystal cognac glass', ru: 'Одноразовый хрустальный бокал' },
     category: 'catering-items', tags: [], price: 0.80, unit: 'piece',
     gradient: 'linear-gradient(135deg, #c471f5 0%, #fa71cd 100%)',
+    image: '/images/menu/glassware.jpg',
   },
   {
     id: 'tea-coffee-spoon',
@@ -505,6 +571,7 @@ export const products: Product[] = [
     description: { ka: 'კოვზი ჩაისა და ყავისთვის', en: 'Spoon for tea and coffee', ru: 'Ложка для чая и кофе' },
     category: 'catering-items', tags: [], price: 0.70, unit: 'piece',
     gradient: 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)',
+    image: '/images/menu/catering-supplies.jpg',
   },
   {
     id: 'wine-glass',
@@ -512,6 +579,7 @@ export const products: Product[] = [
     description: { ka: 'ღვინის ჭიქა', en: 'Wine glass', ru: 'Бокал для вина' },
     category: 'catering-items', tags: [], price: 1.50, unit: 'piece',
     gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    image: '/images/menu/glassware.jpg',
   },
   {
     id: 'coffee-cup',
@@ -519,6 +587,7 @@ export const products: Product[] = [
     description: { ka: 'ყავის ჭიქა', en: 'Coffee cup', ru: 'Кофейная чашка' },
     category: 'catering-items', tags: [], price: 1.50, unit: 'piece',
     gradient: 'linear-gradient(135deg, #d4a574 0%, #a0845c 100%)',
+    image: '/images/menu/catering-supplies.jpg',
   },
   {
     id: 'champagne-glass',
@@ -526,6 +595,7 @@ export const products: Product[] = [
     description: { ka: 'შამპანიურის ჭიქა', en: 'Champagne glass', ru: 'Бокал для шампанского' },
     category: 'catering-items', tags: [], price: 1.50, unit: 'piece',
     gradient: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)',
+    image: '/images/menu/glassware.jpg',
   },
   {
     id: 'juice-glass',
@@ -533,6 +603,7 @@ export const products: Product[] = [
     description: { ka: 'წვენის ჭიქა', en: 'Juice glass', ru: 'Стакан для сока' },
     category: 'catering-items', tags: [], price: 1.20, unit: 'piece',
     gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+    image: '/images/menu/glassware.jpg',
   },
   {
     id: 'juice-glass-cardboard',
@@ -540,6 +611,7 @@ export const products: Product[] = [
     description: { ka: 'მუყაოს ერთჯერადი წვენის ჭიქა', en: 'Cardboard disposable juice glass', ru: 'Картонный одноразовый стакан' },
     category: 'catering-items', tags: [], price: 0.60, unit: 'piece',
     gradient: 'linear-gradient(135deg, #d4a574 0%, #a0845c 100%)',
+    image: '/images/menu/catering-supplies.jpg',
   },
   {
     id: 'dessert-fork',
@@ -547,6 +619,7 @@ export const products: Product[] = [
     description: { ka: 'დესერტის ჩანგალი', en: 'Fork for dessert', ru: 'Вилка для десерта' },
     category: 'catering-items', tags: [], price: 0.80, unit: 'piece',
     gradient: 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)',
+    image: '/images/menu/catering-supplies.jpg',
   },
   {
     id: 'catering-fork',
@@ -554,6 +627,7 @@ export const products: Product[] = [
     description: { ka: 'ფურშეტის ჩანგალი', en: 'Buffet fork', ru: 'Вилка для фуршета' },
     category: 'catering-items', tags: [], price: 1.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)',
+    image: '/images/menu/catering-supplies.jpg',
   },
   {
     id: 'wooden-fork',
@@ -561,6 +635,7 @@ export const products: Product[] = [
     description: { ka: 'ხის ერთჯერადი ჩანგალი', en: 'Wooden disposable fork', ru: 'Деревянная одноразовая вилка' },
     category: 'catering-items', tags: [], price: 0.55, unit: 'piece',
     gradient: 'linear-gradient(135deg, #d4a574 0%, #a0845c 100%)',
+    image: '/images/menu/catering-supplies.jpg',
   },
   {
     id: 'wooden-board-large',
@@ -568,6 +643,7 @@ export const products: Product[] = [
     description: { ka: 'დიდი ხის დაფა', en: 'Large wooden serving board', ru: 'Большая деревянная доска' },
     category: 'catering-items', tags: [], price: 6.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #d4a574 0%, #a0845c 100%)',
+    image: '/images/menu/wooden-board.jpg',
   },
   {
     id: 'wooden-board-striped',
@@ -575,6 +651,7 @@ export const products: Product[] = [
     description: { ka: 'ზოლიანი ხის დაფა', en: 'Striped wooden board', ru: 'Полосатая деревянная доска' },
     category: 'catering-items', tags: [], price: 5.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #d4a574 0%, #a0845c 100%)',
+    image: '/images/menu/wooden-board.jpg',
   },
   {
     id: 'wooden-board-round',
@@ -582,6 +659,7 @@ export const products: Product[] = [
     description: { ka: 'მრგვალი ხის დაფა', en: 'Round wooden board', ru: 'Круглая деревянная доска' },
     category: 'catering-items', tags: [], price: 5.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #d4a574 0%, #a0845c 100%)',
+    image: '/images/menu/wooden-board.jpg',
   },
   {
     id: 'wooden-board-medium',
@@ -589,6 +667,7 @@ export const products: Product[] = [
     description: { ka: 'საშუალო ზომის ხის დაფა', en: 'Medium wooden board', ru: 'Средняя деревянная доска' },
     category: 'catering-items', tags: [], price: 5.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #d4a574 0%, #a0845c 100%)',
+    image: '/images/menu/wooden-board.jpg',
   },
   {
     id: 'wooden-stand',
@@ -596,5 +675,6 @@ export const products: Product[] = [
     description: { ka: 'ხის სტენდი', en: 'Wooden display stand', ru: 'Деревянная подставка' },
     category: 'catering-items', tags: [], price: 6.00, unit: 'piece',
     gradient: 'linear-gradient(135deg, #d4a574 0%, #a0845c 100%)',
+    image: '/images/menu/wooden-board.jpg',
   },
 ];
