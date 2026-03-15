@@ -49,21 +49,32 @@ const ProductCard: React.FC<Props> = ({ product, onDetails, guestCount = 1 }) =>
 
       <button onClick={() => onDetails(product)} className="w-full">
         <div
-          className="h-52 w-full flex items-center justify-center text-6xl relative overflow-hidden"
+          className="h-52 w-full relative overflow-hidden"
           style={{ background: product.gradient }}
         >
-          <span className="opacity-90 group-hover:scale-110 transition-transform duration-300">{
-            product.category === 'canapes' ? '🥪' :
-            product.category === 'burgers' ? '🍔' :
-            product.category === 'pizza' ? '🍕' :
-            product.category === 'sandwiches' ? '🥖' :
-            product.category === 'salads' ? '🥗' :
-            product.category === 'hot' ? '🍖' :
-            product.category === 'desserts' ? '🍰' :
-            product.category === 'drinks' ? '🥤' :
-            product.category === 'sauces' ? '🥫' :
-            product.category === 'inventory' ? '🍴' : '📦'
-          }</span>
+          {product.image ? (
+            <img
+              src={product.image}
+              alt={product.name[lang] || product.name.en}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+              loading="lazy"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-6xl">
+              <span className="opacity-90 group-hover:scale-110 transition-transform duration-300">{
+                product.category === 'canapes' ? '🥪' :
+                product.category === 'burgers' ? '🍔' :
+                product.category === 'pizza' ? '🍕' :
+                product.category === 'sandwiches' ? '🥖' :
+                product.category === 'salads' ? '🥗' :
+                product.category === 'hot' ? '🍖' :
+                product.category === 'desserts' ? '🍰' :
+                product.category === 'drinks' ? '🥤' :
+                product.category === 'sauces' ? '🥫' :
+                product.category === 'inventory' ? '🍴' : '📦'
+              }</span>
+            </div>
+          )}
         </div>
       </button>
       

@@ -44,19 +44,29 @@ const ProductModal: React.FC<Props> = ({ product, onClose, guestCount = 1 }) => 
         className="relative w-full max-w-2xl rounded-3xl bg-card shadow-2xl overflow-hidden animate-fade-in max-h-[90vh] overflow-y-auto"
         onClick={e => e.stopPropagation()}
       >
-        <div className="h-64 w-full flex items-center justify-center text-8xl relative overflow-hidden" style={{ background: product.gradient }}>
-          <span className="opacity-90">{
-            product.category === 'canapes' ? '🥪' :
-            product.category === 'burgers' ? '🍔' :
-            product.category === 'pizza' ? '🍕' :
-            product.category === 'sandwiches' ? '🥖' :
-            product.category === 'salads' ? '🥗' :
-            product.category === 'hot' ? '🍖' :
-            product.category === 'desserts' ? '🍰' :
-            product.category === 'drinks' ? '🥤' :
-            product.category === 'sauces' ? '🥫' :
-            product.category === 'inventory' ? '🍴' : '📦'
-          }</span>
+        <div className="h-64 w-full relative overflow-hidden" style={{ background: product.gradient }}>
+          {product.image ? (
+            <img
+              src={product.image}
+              alt={product.name[lang] || product.name.en}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-8xl">
+              <span className="opacity-90">{
+                product.category === 'canapes' ? '🥪' :
+                product.category === 'burgers' ? '🍔' :
+                product.category === 'pizza' ? '🍕' :
+                product.category === 'sandwiches' ? '🥖' :
+                product.category === 'salads' ? '🥗' :
+                product.category === 'hot' ? '🍖' :
+                product.category === 'desserts' ? '🍰' :
+                product.category === 'drinks' ? '🥤' :
+                product.category === 'sauces' ? '🥫' :
+                product.category === 'inventory' ? '🍴' : '📦'
+              }</span>
+            </div>
+          )}
           
           {/* Badges on image */}
           <div className="absolute top-4 left-4 flex flex-col gap-2">
