@@ -677,4 +677,49 @@ export const products: Product[] = [
     gradient: 'linear-gradient(135deg, #d4a574 0%, #a0845c 100%)',
     image: '/images/menu/wooden-board.jpg',
   },
+
+  // Ready packages (per guest — quantity in cart = number of guests)
+  {
+    id: 'package-basic',
+    name: { ka: 'საბაზისო პაკეტი', en: 'Basic Package', ru: 'Базовый пакет' },
+    description: {
+      ka: '2 სახეობის კანაპე, სალათი, ლიმონათი, ხილის ასორტი',
+      en: '2 canapé types, salad, lemonade, fruit platter',
+      ru: '2 вида канапе, салат, лимонад, фрукты',
+    },
+    category: 'catering-items',
+    tags: [],
+    price: 25,
+    unit: 'person',
+    gradient: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+  },
+  {
+    id: 'package-standard',
+    name: { ka: 'სტანდარტული პაკეტი', en: 'Standard Package', ru: 'Стандартный пакет' },
+    description: {
+      ka: '3 კანაპე, 2 სალათი, ცხელი კერძი, სასმელები, დესერტი',
+      en: '3 canapés, 2 salads, hot dish, beverages, dessert',
+      ru: '3 канапе, 2 салата, горячее, напитки, десерт',
+    },
+    category: 'catering-items',
+    tags: ['popular'],
+    price: 45,
+    unit: 'person',
+    popular: true,
+    gradient: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)',
+  },
+  {
+    id: 'package-premium',
+    name: { ka: 'პრემიუმ პაკეტი', en: 'Premium Package', ru: 'Премиум пакет' },
+    description: {
+      ka: '5 კანაპე, 3 სალათი, 2 ცხელი კერძი, პრემიუმ სასმელები, 2 დესერტი, პერსონალი',
+      en: '5 canapés, 3 salads, 2 hot dishes, premium drinks, 2 desserts, staff',
+      ru: '5 канапе, 3 салата, 2 горячих, напитки премиум, 2 десерта, персонал',
+    },
+    category: 'catering-items',
+    tags: ['premium'],
+    price: 70,
+    unit: 'person',
+    gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  },
 ];

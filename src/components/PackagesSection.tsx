@@ -17,7 +17,8 @@ const PackagesSection: React.FC<Props> = ({ guestCount }) => {
   const packages = [
     {
       id: 'basic',
-      name: t('menu.packageBasic'),
+      productId: 'package-basic' as const,
+      name: t('menu.package.basic'),
       pricePerGuest: 25,
       gradient: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
       items: [
@@ -30,7 +31,8 @@ const PackagesSection: React.FC<Props> = ({ guestCount }) => {
     },
     {
       id: 'standard',
-      name: t('menu.packageStandard'),
+      productId: 'package-standard' as const,
+      name: t('menu.package.standard'),
       pricePerGuest: 45,
       gradient: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)',
       items: [
@@ -44,7 +46,8 @@ const PackagesSection: React.FC<Props> = ({ guestCount }) => {
     },
     {
       id: 'premium',
-      name: t('menu.packagePremium'),
+      productId: 'package-premium' as const,
+      name: t('menu.package.premium'),
       pricePerGuest: 70,
       gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
       items: [
@@ -60,9 +63,11 @@ const PackagesSection: React.FC<Props> = ({ guestCount }) => {
   ];
 
   const handleSelectPackage = (pkg: typeof packages[0]) => {
-    // Add package items to cart (simplified - in production, you'd add actual product IDs)
+    const qty = Math.max(1, guestCount);
+    addItem(pkg.productId, qty);
     toast({
-      description: `${pkg.name} package selected for ${guestCount} guests`,
+      title: t('cart.addedToast'),
+      description: `${pkg.name} · ${qty} ${t('menu.guests')}`,
       duration: 3000,
     });
   };
@@ -115,13 +120,13 @@ const PackagesSection: React.FC<Props> = ({ guestCount }) => {
                     {(pkg.pricePerGuest * guestCount).toFixed(0)}₾
                   </span>
                   <span className="text-sm text-muted-foreground">
-                    ({pkg.pricePerGuest}₾ {t('menu.packagePerGuest')})
+                    ({pkg.pricePerGuest}₾ {t('menu.package.perGuest')})
                   </span>
                 </div>
                 
                 <div className="mb-6">
                   <p className="text-xs uppercase tracking-wide font-semibold text-muted-foreground mb-3">
-                    {t('menu.packageIncludes')}:
+                    {t('menu.package.includes')}:
                   </p>
                   <ul className="space-y-2">
                     {pkg.items.map((item, idx) => (
@@ -142,7 +147,7 @@ const PackagesSection: React.FC<Props> = ({ guestCount }) => {
                   }`}
                   size="lg"
                 >
-                  {t('menu.packageSelect')}
+                  {t('menu.package.select')}
                 </Button>
               </div>
             </Card>

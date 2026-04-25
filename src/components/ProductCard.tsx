@@ -27,7 +27,7 @@ const ProductCard: React.FC<Props> = ({ product, onDetails, guestCount = 1 }) =>
   const portionText = product.unit === 'person' ? t('menu.pricePerPerson') : t('menu.pricePerPiece');
 
   return (
-    <div className="group rounded-2xl border border-border/60 bg-card overflow-hidden shadow-sm hover:shadow-xl hover:border-border transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] relative">
+    <div className="group h-full flex flex-col rounded-2xl border border-border/60 bg-card overflow-hidden shadow-sm hover:shadow-xl hover:border-border transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] relative">
       {/* Badges */}
       <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5">
         {product.popular && (
@@ -47,7 +47,7 @@ const ProductCard: React.FC<Props> = ({ product, onDetails, guestCount = 1 }) =>
         )}
       </div>
 
-      <button onClick={() => onDetails(product)} className="w-full">
+      <button type="button" onClick={() => onDetails(product)} className="w-full shrink-0 text-left">
         <div
           className="h-52 w-full relative overflow-hidden"
           style={{ background: product.gradient }}
@@ -78,8 +78,8 @@ const ProductCard: React.FC<Props> = ({ product, onDetails, guestCount = 1 }) =>
         </div>
       </button>
       
-      <div className="p-5">
-        <div className="flex flex-wrap gap-1.5 mb-3">
+      <div className="p-5 flex flex-col flex-1 min-h-0">
+        <div className="flex flex-wrap gap-1.5 mb-3 shrink-0">
           {product.tags.filter(tag => !['new', 'popular'].includes(tag)).map(tag => (
             <span key={tag} className="text-[10px] uppercase tracking-wider font-semibold px-2.5 py-1 rounded-full bg-secondary/70 text-secondary-foreground">
               {t(`tag.${tag}`)}
@@ -87,21 +87,21 @@ const ProductCard: React.FC<Props> = ({ product, onDetails, guestCount = 1 }) =>
           ))}
         </div>
         
-        <h3 className="font-heading text-xl font-semibold text-card-foreground leading-tight">
+        <h3 className="font-heading shrink-0 text-xl font-semibold text-card-foreground leading-snug line-clamp-3 [overflow-wrap:anywhere] pb-0.5">
           {product.name[lang] || product.name.en}
         </h3>
         
-        <p className="text-sm text-muted-foreground mt-2 line-clamp-2 leading-relaxed">
+        <p className="shrink-0 text-sm text-muted-foreground mt-2 line-clamp-2 pb-1 leading-[1.65] [overflow-wrap:anywhere]">
           {product.description[lang] || product.description.en}
         </p>
         
         {product.unit === 'person' && (
-          <p className="text-xs text-muted-foreground mt-2 italic">
+          <p className="text-xs text-muted-foreground mt-2 italic shrink-0">
             {portionText}
           </p>
         )}
         
-        <div className="flex items-center justify-between mt-5 pt-4 border-t border-border/50">
+        <div className="flex items-center justify-between gap-3 mt-auto pt-4 border-t border-border/50 shrink-0">
           <div>
             <span className="text-xl font-bold text-primary">
               {displayPrice.toFixed(2)}{t('common.gel')}

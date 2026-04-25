@@ -45,8 +45,13 @@ const Menu: React.FC = () => {
     setTags(prev => prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]);
   };
 
+  const menuProducts = useMemo(
+    () => products.filter(p => !p.id.startsWith('package-')),
+    []
+  );
+
   const filtered = useMemo(() => {
-    let result = [...products];
+    let result = [...menuProducts];
     if (category !== 'all') result = result.filter(p => p.category === category);
     if (search) {
       const q = search.toLowerCase();
@@ -61,18 +66,18 @@ const Menu: React.FC = () => {
     else if (sortBy === 'popular') result.sort((a, b) => (b.popular ? 1 : 0) - (a.popular ? 1 : 0));
     else if (sortBy === 'alpha') result.sort((a, b) => (a.name[lang] || a.name.en).localeCompare(b.name[lang] || b.name.en));
     return result;
-  }, [category, search, sortBy, tags, lang]);
+  }, [menuProducts, category, search, sortBy, tags, lang]);
 
-  // Calculate product counts per category
+  // Calculate product counts per category (exclude ready-package rows from grid)
   const productCounts = useMemo(() => {
-    const counts: Record<string, number> = { all: products.length };
+    const counts: Record<string, number> = { all: menuProducts.length };
     categories.forEach(cat => {
       if (cat.id !== 'all') {
-        counts[cat.id] = products.filter(p => p.category === cat.id).length;
+        counts[cat.id] = menuProducts.filter(p => p.category === cat.id).length;
       }
     });
     return counts;
-  }, []);
+  }, [menuProducts]);
 
   return (
     <>
@@ -160,7 +165,7 @@ const Menu: React.FC = () => {
                 )}
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 items-stretch">
                 {filtered.map(product => (
                   <ProductCard 
                     key={product.id} 
